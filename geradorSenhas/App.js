@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 
+
 let charset= "abcdefghijklmnopqrstuvwxyz!#$&%0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export default function App() {
