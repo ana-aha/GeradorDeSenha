@@ -1,27 +1,31 @@
 import { useState } from 'react';
 
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Modal } from 'react-native';
+
+import { ModalPassword } from './src/components/modal/index.js ';
 
 
-let charset= "abcdefghijklmnopqrstuvwxyz!#$&%0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+let charset = "abcdefghijklmnopqrstuvwxyz!#$&%0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 export default function App() {
   const [senhaGerada, setSenhaGerada] = useState("")
+  CONST[modalVisible, setModalVisible] = useState("false")
 
-  function gerarSenha(){
+  function gerarSenha() {
     let senha = "";
 
-    for (let i = 0, n = charset.length; i < 10; i++){
-      senha +=charset.charAt(Math.floor(Math.random() * n))
-    } 
-    setSenhaGerada(senha)
+    for (let i = 0, n = charset.length; i < 10; i++) {
+      senha += charset.charAt(Math.floor(Math.random() * n))
+    }
+    setSenhaGerada(senha);
+    setModalVisible(true);
   }
 
   return (
     <View style={styles.container}>
-      <Image 
-      source={require("./src/img/logolock.png")}
-      style={styles.logo}
+      <Image
+        source={require("./src/img/logolock.png")}
+        style={styles.logo}
       />
 
       <Text style={styles.title}>LockGen</Text>
@@ -29,6 +33,10 @@ export default function App() {
       <TouchableOpacity style={styles.button} onPress={gerarSenha}>
         <Text style={styles.textButton}>Gerar Senha</Text>
       </TouchableOpacity>
+
+      <Modal visible={modalVisible} animationType='fade' transparent={true}>
+        <ModalPassword />
+      </Modal>
 
       <Text style={styles.genText}>{senhaGerada}</Text>
     </View>
